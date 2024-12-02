@@ -1,4 +1,15 @@
 # Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
+<a href='https://arxiv.org/'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
+<a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
+<a href="https://huggingface.co/spaces/">
+	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo-orange' />
+</a>&nbsp;
+
+We present Switti, a scale-wise transformer for text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
+
+<p align="center">
+<img src="assets/teaser.png" width=95%>
+<p>
 
 This repo contains code required to reproduce training of our models (Switti and Switti (AR)) and a notebook with an inference example.
 
@@ -29,20 +40,10 @@ pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation -
 pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ```
 
-# Model weights
-Our final checkpoints can be downloaded via following links:
-|   model    | reso | weights link |
-|:----------:|:-----:|:-----:|
-| RQ-VAE (FT)   | 512x512 | [vae_ft_checkpoint.pt](https://www.dropbox.com/scl/fi/i6py66o26phjqz4xmkgd2/vae_ft_checkpoint.pt?rlkey=onp0zxarht7z5a3c8g3ojmewz&st=bsw9z6fu&dl=1) |
-|  Switti (AR)   | 512x512 | [switti_ar.pt](???) |
-|  Switti   | 512x512 | [model_state_dict.pt](https://www.dropbox.com/scl/fi/99a6v8to1ib0bdlgvoi0r/model_state_dict.pt?rlkey=vs6ofh3w1bg4m31y4h3hj0opn&st=pyihw6an&dl=0) |
-
-Alternatively, it is possible to run Switti with non-finetuned RQ-VAE from VAR, that can be downloaded via this [link](https://huggingface.co/FoundationVision/var/resolve/main/vae_ch160v4096z32.pth)
-
 # Training
 
 ## Data
-We provide the training example on the [COCO](https://cocodataset.org/#download) dataset one needs to prepare `--data_path` in the following format:
+We provide the training example on the [COCO](https://cocodataset.org/#download) dataset, that needs to be prepared in the following format:
 ```
 /path/to/data/:
     train2014/:
@@ -56,13 +57,19 @@ Where `/path/to/data/train2014.csv` is a table with the following header:
 ,file_name,caption
 0,COCO_train2014_000000057870.jpg,A restaurant has modern wooden tables and chairs.
 ```
+Path to the folder containing the prepared COCO dataset is used as `--data_path` argument in a training script.
 
 ## Training script
-A minimal example of training on several GPUs using FSDP can be found at `sh_scripts/run_example.sh`.
+A minimal example of training on several GPUs using FSDP can be found at `sh_scripts/train_example.sh`.
 
 During training, intermediate checkpoints and tensorboard logs will be saved to the `local_output` folder.
 
 Set `--use_ar=true` to train an AutoRegressive version of Switti
 
 # Inference
-After you download the weights of our fine-tuned RQ-VAE and Switti generator, you can experiment with inference using various sampling parameters, following `inference_example.ipynb`
+You can experiment with Switti inference using various sampling parameters via [HuggingFace demo](https://) or a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
+
+# Citation
+If you make use of our work, please cite our paper:
+```
+```
