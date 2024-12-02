@@ -4,23 +4,23 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo).">
-  <meta property="og:title" content="Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization"/>
-  <meta property="og:description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo)."/>
-  <meta property="og:url" content="https://yandex-research.github.io/vqdm/"/>
+  <meta name="description" content="This work introduces Switti, a novel scale-wise generative transformer for fast text-to-image generation.">
+  <meta property="og:title" content="Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis"/>
+  <meta property="og:description" content="This work introduces Switti, a novel scale-wise generative transformer for fast text-to-image generation."/>
+  <meta property="og:url" content="https://yandex-research.github.io/switti/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/images/vqdm_overview_wo_input_scales.png" />
+  <meta property="og:image" content="static/images/teaser.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
 
-  <meta name="twitter:title" content="Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization">
-  <meta name="twitter:description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo).">
+  <meta name="twitter:title" content="Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis">
+  <meta name="twitter:description" content="This work introduces Switti, a novel scale-wise generative transformer for fast text-to-image generation.">
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/vqdm_overview_wo_input_scales.png">
+  <meta name="twitter:image" content="static/images/teaser.png">
   <meta name="twitter:card" content="summary_large_image">
   <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="diffusion models, Stable Diffusion, text-to-image, SDXL, SDXL-Turbo, quantization, vector quantization, PTQ, post-training quantization, compression">
+  <meta name="keywords" content="text-to-image, next-scale prediction, scale-wise transformers">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
@@ -52,45 +52,34 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Accurate Compression of Text-to-Image Diffusion
-Models via Vector Quantization</h1>
+            <h1 class="title is-1 publication-title">Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=Bktg6JEAAAAJ&hl=ru" target="_blank">Vage Egiazarian</a><sup>* 1, 2</sup>,</span>
+                <a href="https://scholar.google.com/citations?user=GdnApR0AAAAJ" target="_blank">Anton Voronov</a><sup>1, 2, 3</sup>,</span>
                 <span class="author-block">
-                  <a href="https://scholar.google.com/citations?hl=ru&user=L78B2lcAAAAJ" target="_blank">Denis Kuznedelev</a><sup>* 1, 3</sup>,</span>
-                  <span class="author-block">
-                    <a href="https://scholar.google.com/citations?hl=ru&user=GdnApR0AAAAJ" target="_blank">Anton Voronov</a><sup>* 1, 4</sup>,</span>
+                  <a href="https://scholar.google.com/citations?user=L78B2lcAAAAJ" target="_blank">Denis Kuznedelev</a><sup>1, 4</sup>,</span>
                    <span class="author-block">
-                  <a href="https://scholar.google.com/citations?hl=ru&user=RKFjdJEAAAAJ" target="_blank">Ruslan Svirschevski</a><sup>1, 2</sup>,</span>
+                  <a href="https://scholar.google.com/citations?user=BWLDIa8AAAAJ&hl" target="_blank">Mikhail Khoroshikh</a><sup>1</sup>,</span>
                    <span class="author-block">
-                  <a href="https://scholar.google.com/citations?hl=ru&user=YfmwSv8AAAAJ" target="_blank">Michael Goin</a><sup>5</sup>,</span>
-                   <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Daniil Pavlov</a><sup>4</sup>,</span>
-                   <span class="author-block">
-                  <a href="https://scholar.google.com/citations?hl=ru&user=75q-6ZQAAAAJ" target="_blank">Dan Alistarh</a><sup>5, 6</sup>,</span>
-
+                  <a href="https://scholar.google.com/citations?user=GS5HTlkAAAAJ&hl" target="_blank">Valentin Khrulkov</a><sup>1</sup>,</span>
                   <span class="author-block">
                     <a href="https://scholar.google.com/citations?hl=ru&user=NiPmk8oAAAAJ" target="_blank">Dmitry Baranchuk</a><sup>1</sup>
-
                   </span>
-
                   </div>
 
                  <div class="is-size-5 publication-authors">
                     <span class="author-block"><sup>1</sup>Yandex Research  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>HSE University</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <sup>3</sup>Skoltech</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>MIPT</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>5</sup>Neural Magic</span>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>6</sup>IST Austria</span>
+                    <sup>3</sup>MIPT</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>Skoltech</span>
                    <!-- <br>Conferance name and year -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
                   </div>
 
                   <div class="column has-text-centered">
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
                       <span class="link-block">
-                        <a href="https://arxiv.org/pdf/2409.00492" target="_blank"
+                        <a href="TODO" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
@@ -112,7 +101,7 @@ Models via Vector Quantization</h1>
 
                   <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/yandex-research/vqdm" target="_blank"
+                    <a href="https://github.com/yandex-research/switti" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -123,7 +112,7 @@ Models via Vector Quantization</h1>
 
                 <!-- ArXiv abstract Link -->
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2409.00492" target="_blank"
+                  <a href="TODO" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
@@ -144,10 +133,10 @@ Models via Vector Quantization</h1>
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-        <img src="static/images/vqdm_overview_wo_input_scales.png" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
+        <img src="static/images/teaser.png" alt="MY ALT TEXT"/>
+        <!-- <h2 class="subtitle has-text-centered">
           Overview of the proposed layer-wise calibration procedure before fine-tuning.
-        </h2>
+        </h2> -->
     </div>
   </div>
 </section>
@@ -161,14 +150,13 @@ Models via Vector Quantization</h1>
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Text-to-image diffusion models have emerged as a powerful framework for high-quality image generation given textual prompts.
-  Their success has driven the rapid development of production-grade diffusion models that consistently increase in size and already contain billions of parameters.
-  As a result, state-of-the-art text-to-image models are becoming less accessible in practice, especially in resource-limited environments.
-  <i>Post-training quantization</i> (PTQ) tackles this issue by compressing the pretrained model weights into lower-bit representations.
-  Recent diffusion quantization techniques primarily rely on <i>uniform scalar quantization</i>, providing decent performance for the models compressed to 4 bits.
-  This work demonstrates that more versatile <i>vector quantization</i> (VQ) may achieve higher compression rates for large-scale text-to-image diffusion models.
-  Specifically, we tailor vector-based PTQ methods to recent billion-scale text-to-image models, such as SDXL and SDXL-Turbo, and show that the diffusion models of 2B+ parameters compressed to around 3 bits using VQ exhibit the same image quality and textual alignment as previous 4-bit compression techniques, as confirmed by human evaluation.
-
+            This work presents Switti, a scale-wise transformer for text-to-image generation. 
+            Starting from existing next-scale prediction AR models, we first explore them for T2I generation and propose architectural modifications to improve their convergence and overall performance. 
+            We then observe that self-attention maps of the pretrained scale-wise AR model exhibit weak dependence on preceding scales. 
+            Based on this insight, we propose a non-AR counterpart facilitating ~11% faster sampling and lower memory usage while achieving similar generation performance.
+            Furthermore, we reveal that classifier-free guidance at high-resolution scales is often unnecessary and can even degrade performance.
+            By disabling guidance at these scales, we achieve an additional sampling acceleration of ~20% and improve the generation of fine-grained details. 
+            Extensive human preference studies and automated evaluations confirm that Switti outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being up to 7x faster.
           </p>
         </div>
       </div>
@@ -180,93 +168,30 @@ Models via Vector Quantization</h1>
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">
-      <h2 class="subtitle has-text-centered">
-       <font size="20"> SDXL</font>
+      <!-- <h2 class="subtitle has-text-centered"> -->
+       <!-- <font size="20"> SDXL</font> -->
 </h2>
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="static/images/SDXL_comparison_1.jpg" alt="MY ALT TEXT"/>
+        <img src="static/images/main_image_grid_different_models.png" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-          Comparison between different compression schemes for SDXL.
+          Qualitative comparison of Switti against competing AR and diffusion-based models.
         </h2>
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/SDXL_comparison_2.jpg" alt="MY ALT TEXT"/>
+        <img src="static/images/supp_image_grid_different_models.png" alt="MY ALT TEXT"/>
         <h2 class="subtitle has-text-centered">
-          Comparison between different compression schemes for SDXL.
+          Qualitative comparison of Switti against competing AR and diffusion-based models.
         </h2>
       </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/SDXL_comparison_3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Comparison between different compression schemes for SDXL.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/SDXL_comparison_4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-        Comparison between different compression schemes for SDXL.
-      </h2>
-    </div>
   </div>
 </div>
 </div>
 </section>
 <!-- End image carousel -->
-
-
-<!--<h2 class="subtitle has-text-centered">-->
-<!--       <font size="20"> SDXL-Turbo</font>-->
-<!--</h2>-->
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-      <h2 class="subtitle has-text-centered">
-       <font size="20"> SDXL-Turbo</font>
-</h2>
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/SDXL_Turbo_1.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-            Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/SDXL_Turbo_2.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-         Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/SDXL_Turbo_3.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-            Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
-
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/SDXL_Turbo_4.jpg" alt="MY ALT TEXT"/>
-      <h2 class="subtitle has-text-centered">
-          Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
-
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-
 
 
   <!-- Teaser video-->
@@ -276,9 +201,9 @@ Models via Vector Quantization</h1>
        <font size="20"> Human evaluation</font>
 </h2>
     <div class="container" >
-        <img src="static/images/comparison.png" alt="MY ALT TEXT"  align="center" style=" max-width: 110%" />
+        <img src="static/images/sbs_results.png" alt="MY ALT TEXT"  align="center" style=" max-width: 110%" />
         <h2 class="subtitle has-text-centered">
-          <b>Left.</b> VQDM vs baselines. <b>Right.</b> Quantized vs full-precision models.
+          Switti vs competing AR and diffusion-based models. 
         </h2>
     </div>
   </div>
@@ -287,12 +212,12 @@ Models via Vector Quantization</h1>
   <section class="hero teaser">
   <div class="container is-max-desktop" >
       <h2 class="subtitle has-text-centered">
-       <font size="20"> Automatic Metrics</font>
+       <font size="20"> Automated Metrics</font>
 </h2>
     <div class="container" align="center">
-        <img src="static/images/table.png" alt="MY ALT TEXT" width="70%" />
+        <img src="static/images/metrics_results.png" alt="MY ALT TEXT" width="70%" />
         <h2 class="subtitle has-text-centered">
-          Evaluation of quantized SDXL models for different bit-widths in terms of automatic metrics.
+          Quantitative comparison of Switti to competing AR and diffusion-based models.
         </h2>
     </div>
   </div>
@@ -356,9 +281,6 @@ Models via Vector Quantization</h1>
 
 
 
-
-
-
 <!--&lt;!&ndash; Paper poster &ndash;&gt;-->
 <!--<section class="hero is-small is-light">-->
 <!--  <div class="hero-body">-->
@@ -378,13 +300,7 @@ Models via Vector Quantization</h1>
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{egiazarian2024vqdm,
-  title={Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization},
-  author={Vage Egiazarian and Denis Kuznedelev and Anton Voronov and Ruslan Svirschevski and Michael Goin and Daniil Pavlov and Dan Alistarh and Dmitry Baranchuk},
-  journal={arXiv preprint arXiv:2409.00492},
-  year={2024},
-  url={https://arxiv.org/abs/2409.00492}
-}</code></pre>
+      <pre><code>TODO</code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
