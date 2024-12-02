@@ -19,6 +19,7 @@ from utils.fsdp import load_model_state, save_model_state
 from utils.lr_control import filter_params, lr_wd_annealing
 from utils.data import build_dataset, coco_collate_fn
 from utils.data_sampler import DistInfiniteBatchSampler
+from utils.fid_score_in_memory import calculate_fid
 
 
 def build_everything(args: arg_util.Args):
@@ -231,14 +232,14 @@ def main_training():
                 images = [to_PIL_image(image) for image in gathered_images]
 
                 if dist.is_master():
-                    # print("Evaluating FID score...")
-                    # fid_score = calculate_fid(
-                    #     images, fid_stats_path, inception_path=args.inception_path
-                    # )
+                    print("Evaluating FID score...")
+                    fid_score = calculate_fid(
+                        images, fid_stats_path, inception_path=args.inception_path
+                    )
 
                     eval_metrics = {
                         "CLIP score": clip_score,
-                        # "FID": fid_score,
+                        "FID": fid_score,
                         "Pickscore": pick_score,
                         "ImageReward": image_reward,
                     }
