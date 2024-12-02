@@ -22,6 +22,8 @@ from utils.data_sampler import DistInfiniteBatchSampler
 from utils.fid_score_in_memory import calculate_fid
 
 
+DEFAULT_VAE_CKPT = "vae_ch160v4096z32.pth"
+
 def build_everything(args: arg_util.Args):
     # create tensorboard logger
     tb_lg: misc.TensorboardLogger
@@ -69,6 +71,10 @@ def build_everything(args: arg_util.Args):
         use_crop_cond=args.use_crop_cond,
     )
     # Load VAE and Switti checkpoints
+    if args.vae_ckpt is None and not os.path.exists(DEFAULT_VAE_CKPT):
+        if dist.is_local_master():
+            os.system(f'wget https://huggingface.co/FoundationVision/var/resolve/main/{DEFAULT_VAE_CKPT}')
+    dist.barrier()
     vae_local.load_state_dict(torch.load(args.vae_ckpt, map_location="cpu"), strict=True)
     start_it = load_model_state(args, switti_wo_ddp)
     vae_local: VQVAE = args.compile_model(vae_local, args.vfast)

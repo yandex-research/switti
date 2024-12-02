@@ -27,7 +27,6 @@ class InfiniteBatchSampler(Sampler):
         self.epoch = 0
         self.same_seed_for_all_ranks = seed_for_all_rank
         self.indices = self.gener_indices()
-        #self.start_ep, self.start_it = start_ep, start_it
         self.start_it = start_it
 
     def gener_indices(self):

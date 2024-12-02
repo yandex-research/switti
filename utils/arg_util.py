@@ -40,7 +40,7 @@ class Args(Tap):
     data_path: str = "path_to_your_dataset"
     text_encoder_path: str = "openai/clip-vit-large-patch14"
     text_encoder_2_path: str = "laion/CLIP-ViT-bigG-14-laion2B-39B-b160k"
-    vae_ckpt: str = "vae_checkpoint_ft.pt"
+    vae_ckpt: str | None
     exp_name: str = "experiment_name"
 
     # eval sampling args
@@ -54,7 +54,7 @@ class Args(Tap):
     coco_ref_stats_path: str = "stats/fid_stats_mscoco256_val.npz"
     mjhq_ref_stats_path: str = "stats/fid_stats_mjhq256_val.npz"
     inception_path: str = "stats/pt_inception-2015-12-05-6726825d.pth"
-    guidance: float = 4
+    guidance: float = 6
     top_k: int = 400
     top_p: float = 0.95
 
