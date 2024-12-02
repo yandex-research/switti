@@ -9,7 +9,7 @@ from models.helpers import sample_with_top_k_top_p_, gumbel_softmax_with_rng
 
 
 class SwittiPipeline:
-    vae_path = "vae_ft_checkpoint.pt"
+    vae_path = "yresearch/VQVAE-Switti"
     text_encoder_path = "openai/clip-vit-large-patch14"
     text_encoder_2_path = "laion/CLIP-ViT-bigG-14-laion2B-39B-b160k"
 
@@ -82,14 +82,16 @@ class SwittiPipeline:
         prompt: str | list[str],
         null_prompt: str = "",
         seed: int | None = None,
-        cfg: float = 4.0,
+        cfg: float = 6.,
         top_k: int = 400,
         top_p: float = 0.95,
         more_smooth: bool = False,
         return_pil: bool = True,
         smooth_start_si: int = 0,
         turn_off_cfg_start_si: int = 10,
+        turn_on_cfg_start_si: int = 0,
         image_size: tuple[int, int] = (512, 512),
+        last_scale_temp: None | float = None,
     ) -> torch.Tensor | list[PILImage]:
         """
         only used for inference, on autoregressive mode
@@ -154,6 +156,7 @@ class SwittiPipeline:
                 freqs_cis = switti.freqs_cis
 
             if si >= turn_off_cfg_start_si:
+                apply_smooth = False
                 x_BLC = x_BLC[:B]
                 context = context[:B]
                 context_attn_bias = context_attn_bias[:B]
@@ -162,12 +165,14 @@ class SwittiPipeline:
                 if crop_cond is not None:
                     crop_cond = crop_cond[:B]
                 for b in switti.blocks:
-                    if b.attn.caching:
+                    if b.attn.caching and b.attn.cached_k is not None:
                         b.attn.cached_k = b.attn.cached_k[:B]
                         b.attn.cached_v = b.attn.cached_v[:B]
-                    if b.cross_attn.caching:
+                    if b.cross_attn.caching and b.cross_attn.cached_k is not None:
                         b.cross_attn.cached_k = b.cross_attn.cached_k[:B]
                         b.cross_attn.cached_v = b.cross_attn.cached_v[:B]
+            else:
+                apply_smooth = more_smooth
 
             for block in switti.blocks:
                 x_BLC = block(
@@ -184,11 +189,15 @@ class SwittiPipeline:
             logits_BlV = switti.get_logits(x_BLC, cond_BD)
 
             # Guidance
-            if si < turn_off_cfg_start_si:
+            if si < turn_on_cfg_start_si:
+                logits_BlV = logits_BlV[:B]
+            elif si >= turn_on_cfg_start_si and si < turn_off_cfg_start_si:
                 t = cfg * ratio
                 logits_BlV = (1 + t) * logits_BlV[:B] - t * logits_BlV[B:]
+            elif last_scale_temp is not None:
+                logits_BlV = logits_BlV / last_scale_temp
 
-            if more_smooth and si >= smooth_start_si:
+            if apply_smooth and si >= smooth_start_si:
                 # not used when evaluating FID/IS/Precision/Recall
                 gum_t = max(0.27 * (1 - ratio * 0.95), 0.005)  # refer to mask-git
                 idx_Bl = gumbel_softmax_with_rng(
