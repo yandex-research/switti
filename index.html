@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo).">
+  <meta property="og:title" content="Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization"/>
+  <meta property="og:description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo)."/>
+  <meta property="og:url" content="https://yandex-research.github.io/vqdm/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/images/vqdm_overview_wo_input_scales.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization">
+  <meta name="twitter:description" content="This work introduces Vector Quantization for text-to-image Diffusion Models (VQDM), that provides highly accurate 3-4 bit compression of diffusion models with 2B+ parameters (SDXL and SDXL-Turbo).">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/vqdm_overview_wo_input_scales.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="diffusion models, Stable Diffusion, text-to-image, SDXL, SDXL-Turbo, quantization, vector quantization, PTQ, post-training quantization, compression">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Academic Project Page</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Accurate Compression of Text-to-Image Diffusion
+Models via Vector Quantization</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Bktg6JEAAAAJ&hl=ru" target="_blank">Vage Egiazarian</a><sup>* 1, 2</sup>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=ru&user=L78B2lcAAAAJ" target="_blank">Denis Kuznedelev</a><sup>* 1, 3</sup>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?hl=ru&user=GdnApR0AAAAJ" target="_blank">Anton Voronov</a><sup>* 1, 4</sup>,</span>
+                   <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=ru&user=RKFjdJEAAAAJ" target="_blank">Ruslan Svirschevski</a><sup>1, 2</sup>,</span>
+                   <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=ru&user=YfmwSv8AAAAJ" target="_blank">Michael Goin</a><sup>5</sup>,</span>
+                   <span class="author-block">
+                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Daniil Pavlov</a><sup>4</sup>,</span>
+                   <span class="author-block">
+                  <a href="https://scholar.google.com/citations?hl=ru&user=75q-6ZQAAAAJ" target="_blank">Dan Alistarh</a><sup>5, 6</sup>,</span>
+
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?hl=ru&user=NiPmk8oAAAAJ" target="_blank">Dmitry Baranchuk</a><sup>1</sup>
+
+                  </span>
+
+                  </div>
+
+                 <div class="is-size-5 publication-authors">
+                    <span class="author-block"><sup>1</sup>Yandex Research  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>2</sup>HSE University</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <sup>3</sup>Skoltech</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>4</sup>MIPT</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>5</sup>Neural Magic</span>
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <sup>6</sup>IST Austria</span>
+                   <!-- <br>Conferance name and year -->
+                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2409.00492" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+<!--                    &lt;!&ndash; Supplementary PDF link &ndash;&gt;-->
+<!--                    <span class="link-block">-->
+<!--                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"-->
+<!--                      class="external-link button is-normal is-rounded is-dark">-->
+<!--                      <span class="icon">-->
+<!--                        <i class="fas fa-file-pdf"></i>-->
+<!--                      </span>-->
+<!--                      <span>Supplementary</span>-->
+<!--                    </a>-->
+<!--                  </span>-->
+
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/yandex-research/vqdm" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2409.00492" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <img src="static/images/vqdm_overview_wo_input_scales.png" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Overview of the proposed layer-wise calibration procedure before fine-tuning.
+        </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Text-to-image diffusion models have emerged as a powerful framework for high-quality image generation given textual prompts.
+  Their success has driven the rapid development of production-grade diffusion models that consistently increase in size and already contain billions of parameters.
+  As a result, state-of-the-art text-to-image models are becoming less accessible in practice, especially in resource-limited environments.
+  <i>Post-training quantization</i> (PTQ) tackles this issue by compressing the pretrained model weights into lower-bit representations.
+  Recent diffusion quantization techniques primarily rely on <i>uniform scalar quantization</i>, providing decent performance for the models compressed to 4 bits.
+  This work demonstrates that more versatile <i>vector quantization</i> (VQ) may achieve higher compression rates for large-scale text-to-image diffusion models.
+  Specifically, we tailor vector-based PTQ methods to recent billion-scale text-to-image models, such as SDXL and SDXL-Turbo, and show that the diffusion models of 2B+ parameters compressed to around 3 bits using VQ exhibit the same image quality and textual alignment as previous 4-bit compression techniques, as confirmed by human evaluation.
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+       <font size="20"> SDXL</font>
+</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_comparison_1.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Comparison between different compression schemes for SDXL.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_comparison_2.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+          Comparison between different compression schemes for SDXL.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_comparison_3.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+         Comparison between different compression schemes for SDXL.
+       </h2>
+     </div>
+     <div class="item">
+      <!-- Your image here -->
+      <img src="static/images/SDXL_comparison_4.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-centered">
+        Comparison between different compression schemes for SDXL.
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+<!--<h2 class="subtitle has-text-centered">-->
+<!--       <font size="20"> SDXL-Turbo</font>-->
+<!--</h2>-->
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+       <font size="20"> SDXL-Turbo</font>
+</h2>
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_Turbo_1.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+            Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_Turbo_2.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+         Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
+        </h2>
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/SDXL_Turbo_3.jpg" alt="MY ALT TEXT"/>
+        <h2 class="subtitle has-text-centered">
+            Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
+
+       </h2>
+     </div>
+     <div class="item">
+      <!-- Your image here -->
+      <img src="static/images/SDXL_Turbo_4.jpg" alt="MY ALT TEXT"/>
+      <h2 class="subtitle has-text-centered">
+          Comparison of SDXL-Turbo quantized with VQDM and the full-precision model for different sampling steps.
+
+      </h2>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+
+
+  <!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop" >
+      <h2 class="subtitle has-text-centered">
+       <font size="20"> Human evaluation</font>
+</h2>
+    <div class="container" >
+        <img src="static/images/comparison.png" alt="MY ALT TEXT"  align="center" style=" max-width: 110%" />
+        <h2 class="subtitle has-text-centered">
+          <b>Left.</b> VQDM vs baselines. <b>Right.</b> Quantized vs full-precision models.
+        </h2>
+    </div>
+  </div>
+</section>
+<br><br>
+  <section class="hero teaser">
+  <div class="container is-max-desktop" >
+      <h2 class="subtitle has-text-centered">
+       <font size="20"> Automatic Metrics</font>
+</h2>
+    <div class="container" align="center">
+        <img src="static/images/table.png" alt="MY ALT TEXT" width="70%" />
+        <h2 class="subtitle has-text-centered">
+          Evaluation of quantized SDXL models for different bit-widths in terms of automatic metrics.
+        </h2>
+    </div>
+  </div>
+</section>
+
+  <!-- End image carousel -->
+
+<!--&lt;!&ndash; Youtube video &ndash;&gt;-->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--      <h2 class="title is-3">Video Presentation</h2>-->
+<!--      <div class="columns is-centered has-text-centered">-->
+<!--        <div class="column is-four-fifths">-->
+<!--          -->
+<!--          <div class="publication-video">-->
+<!--            &lt;!&ndash; Youtube embed code here &ndash;&gt;-->
+<!--            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; End youtube video &ndash;&gt;-->
+
+
+<!--&lt;!&ndash; Video carousel &ndash;&gt;-->
+<!--<section class="hero is-small">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title is-3">Another Carousel</h2>-->
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+<!--        <div class="item item-video1">-->
+<!--          <video poster="" id="video1" autoplay controls muted loop height="100%">-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel1.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-video2">-->
+<!--          <video poster="" id="video2" autoplay controls muted loop height="100%">-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel2.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--        <div class="item item-video3">-->
+<!--          <video poster="" id="video3" autoplay controls muted loop height="100%">\-->
+<!--            &lt;!&ndash; Your video file here &ndash;&gt;-->
+<!--            <source src="static/videos/carousel3.mp4"-->
+<!--            type="video/mp4">-->
+<!--          </video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; End video carousel &ndash;&gt;-->
+
+
+
+
+
+
+<!--&lt;!&ndash; Paper poster &ndash;&gt;-->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title">Poster</h2>-->
+
+<!--      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">-->
+<!--          </iframe>-->
+<!--        -->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </section>-->
+<!--&lt;!&ndash;End paper poster &ndash;&gt;-->
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@article{egiazarian2024vqdm,
+  title={Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization},
+  author={Vage Egiazarian and Denis Kuznedelev and Anton Voronov and Ruslan Svirschevski and Michael Goin and Daniil Pavlov and Dan Alistarh and Dmitry Baranchuk},
+  journal={arXiv preprint arXiv:2409.00492},
+  year={2024},
+  url={https://arxiv.org/abs/2409.00492}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
