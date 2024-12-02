@@ -67,12 +67,9 @@ During training, intermediate checkpoints and tensorboard logs will be saved to 
 Set `--use_ar=true` to train an AutoRegressive version of Switti
 
 # Inference
-## HF Models
-|  HF🤗 model    
-|:----------:|
-|  [Switti AR](https://huggingface.co/yresearch/Switti-AR) |
-|  [Switti](https://huggingface.co/yresearch/Switti) |
-|  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
+## HF🤗 Models
+| [Switti AR](https://huggingface.co/yresearch/Switti-AR) |  [Switti](https://huggingface.co/yresearch/Switti) |  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
+|:---|:---|:---|
 
 ## Experiments
 You can start generating images with Switti using this code snippet: 
