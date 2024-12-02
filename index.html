@@ -110,8 +110,18 @@
                   </a>
                 </span>
 
-                <!-- ArXiv abstract Link -->
                 <span class="link-block">
+                  <a href="https://huggingface.co/spaces/dbaranchuk/Switti" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <span>&#129303;</span>
+                  </span>
+                  <span>Demo</span>
+                </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
                   <a href="TODO" target="_blank"
                   class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -119,7 +129,7 @@
                   </span>
                   <span>arXiv</span>
                 </a>
-              </span>
+              </span> -->
             </div>
           </div>
         </div>
@@ -152,11 +162,11 @@
           <p>
             This work presents Switti, a scale-wise transformer for text-to-image generation. 
             Starting from existing next-scale prediction AR models, we first explore them for T2I generation and propose architectural modifications to improve their convergence and overall performance. 
-            We then observe that self-attention maps of the pretrained scale-wise AR model exhibit weak dependence on preceding scales. 
-            Based on this insight, we propose a non-AR counterpart facilitating ~11% faster sampling and lower memory usage while achieving similar generation performance.
-            Furthermore, we reveal that classifier-free guidance at high-resolution scales is often unnecessary and can even degrade performance.
+            We then observe that self-attention maps of our pretrained scale-wise AR model exhibit weak dependence on preceding scales. 
+            Based on this insight, we propose a non-AR counterpart facilitating ~11% faster sampling and lower memory usage while also achieving slightly better generation quality.
+            Furthermore, we reveal that classifier-free guidance at high-resolution scales is often unnecessary and can even degrade performance. 
             By disabling guidance at these scales, we achieve an additional sampling acceleration of ~20% and improve the generation of fine-grained details. 
-            Extensive human preference studies and automated evaluations confirm that Switti outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being up to 7x faster.
+            Extensive human preference studies and automated evaluations show that Switti outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being up to 7x faster.
           </p>
         </div>
       </div>
@@ -168,24 +178,29 @@
 <!-- Image carousel -->
 <section class="hero is-small">
   <div class="hero-body">
-      <!-- <h2 class="subtitle has-text-centered"> -->
-       <!-- <font size="20"> SDXL</font> -->
 </h2>
     <div class="container">
       <div id="results-carousel" class="carousel results-carousel">
        <div class="item">
         <!-- Your image here -->
-        <img src="static/images/main_image_grid_different_models.png" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
+        <img src="static/images/gh-page-image_grid_different_models_2.png" alt="MY ALT TEXT"/>
+        <!-- <h2 class="subtitle has-text-centered">
           Qualitative comparison of Switti against competing AR and diffusion-based models.
-        </h2>
+        </h2> -->
       </div>
       <div class="item">
         <!-- Your image here -->
-        <img src="static/images/supp_image_grid_different_models.png" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
+        <img src="static/images/gh-page-image_grid_different_models_0.png" alt="MY ALT TEXT"/>
+        <!-- <h2 class="subtitle has-text-centered">
           Qualitative comparison of Switti against competing AR and diffusion-based models.
-        </h2>
+        </h2> -->
+      </div>
+      <div class="item">
+        <!-- Your image here -->
+        <img src="static/images/gh-page-image_grid_different_models_1.png" alt="MY ALT TEXT"/>
+        <!-- <h2 class="subtitle has-text-centered">
+          Qualitative comparison of Switti against competing AR and diffusion-based models.
+        </h2> -->
       </div>
   </div>
 </div>
@@ -212,10 +227,25 @@
   <section class="hero teaser">
   <div class="container is-max-desktop" >
       <h2 class="subtitle has-text-centered">
+       <font size="20"> Inference performance evaluation</font>
+</h2>
+    <div class="container" align="center">
+        <img src="static/images/inference_results.png" alt="MY ALT TEXT" width="50%" />
+        <h2 class="subtitle has-text-centered">
+          Comparison of models’ 512×512 image generation time.
+        </h2>
+    </div>
+  </div>
+</section>
+</section>
+<br><br>
+  <section class="hero teaser">
+  <div class="container is-max-desktop" >
+      <h2 class="subtitle has-text-centered">
        <font size="20"> Automated Metrics</font>
 </h2>
     <div class="container" align="center">
-        <img src="static/images/metrics_results.png" alt="MY ALT TEXT" width="70%" />
+        <img src="static/images/switti_metrics_results.png" alt="MY ALT TEXT" width="100%" />
         <h2 class="subtitle has-text-centered">
           Quantitative comparison of Switti to competing AR and diffusion-based models.
         </h2>
