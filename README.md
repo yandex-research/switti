@@ -10,7 +10,7 @@
 <p>
 We present Switti, a scale-wise transformer for fast text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
 
-This repo contains code required to reproduce training of our models (Switti and Switti (AR)) and a notebook with an inference example.
+This repo contains training code for our models (Switti and Switti (AR)) and a notebook with an inference example.
 
 # Setup
 
