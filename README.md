@@ -1,7 +1,7 @@
 # Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
 <a href='https://arxiv.org/'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
 <a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
-<a href="https://huggingface.co/spaces/">
+<a href="https://huggingface.co/spaces/dbaranchuk/Switti">
 	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo-orange' />
 </a>
 
