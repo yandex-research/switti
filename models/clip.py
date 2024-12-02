@@ -12,10 +12,11 @@ class FrozenCLIPEmbedder(nn.Module):
         device="cuda",
         max_length=77,
         freeze=True,
+        dtype=torch.float32,
     ):
         super().__init__()
         self.tokenizer = CLIPTokenizer.from_pretrained(version)
-        self.transformer = CLIPTextModel.from_pretrained(version).to(device)
+        self.transformer = CLIPTextModel.from_pretrained(version).to(device, dtype)
         self.device = device
         self.hidden_size = self.transformer.config.hidden_size
         self.max_length = max_length

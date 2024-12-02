@@ -13,11 +13,13 @@ class SwittiPipeline:
     text_encoder_path = "openai/clip-vit-large-patch14"
     text_encoder_2_path = "laion/CLIP-ViT-bigG-14-laion2B-39B-b160k"
 
-    def __init__(self, switti, vae, text_encoder, text_encoder_2, device):
-        self.switti = switti
-        self.vae = vae
-        self.text_encoder = text_encoder
-        self.text_encoder_2 = text_encoder_2
+    def __init__(self, switti, vae, text_encoder, text_encoder_2,
+                 device, dtype=torch.float32,
+                 ):
+        self.switti = switti.to(dtype)
+        self.vae = vae.to(dtype)
+        self.text_encoder = text_encoder.to(dtype)
+        self.text_encoder_2 = text_encoder_2.to(dtype)
 
         self.switti.eval()
         self.vae.eval()
@@ -25,13 +27,17 @@ class SwittiPipeline:
         self.device = device
 
     @classmethod
-    def from_pretrained(cls, pretrained_model_name_or_path, device="cuda"):
+    def from_pretrained(cls,
+                        pretrained_model_name_or_path,
+                        torch_dtype=torch.bfloat16,
+                        device="cuda",
+                        ):
         switti = SwittiHF.from_pretrained(pretrained_model_name_or_path).to(device)
         vae = VQVAEHF.from_pretrained(cls.vae_path).to(device)
         text_encoder = FrozenCLIPEmbedder(cls.text_encoder_path, device=device)
         text_encoder_2 = FrozenCLIPEmbedder(cls.text_encoder_2_path, device=device)
 
-        return cls(switti, vae, text_encoder, text_encoder_2, device)
+        return cls(switti, vae, text_encoder, text_encoder_2, device, torch_dtype)
 
     @staticmethod
     def to_image(tensor):

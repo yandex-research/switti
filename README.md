@@ -76,14 +76,13 @@ You can start generating images with Switti using this code snippet:
 ```python
 import torch
 from models import SwittiPipeline
-from calculate_metrics import to_PIL_image
 
 device = 'cuda:0'
 model_path = "yresearch/Switti"
 
 pipe = SwittiPipeline.from_pretrained(model_path, dtype=torch.bfloat16).to(device)
 
-prompts = ["an astronaut rides a pig through in the forest. next to a river, with clouds in the sky",
+prompts = ["Cute winter dragon baby, kawaii, Pixar, ultra detailed, glacial background, extremely realistic",
            "flying robot koi fish with armour plating, neon glowing eyes and wiring, 4k, unreal engine, marvel comics style",
            "sci-fi cosmic diarama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism",
            "A cloud dragon flying over mountains, its body swirling with the wind.",
@@ -95,7 +94,9 @@ images = pipe(prompts,
               more_smooth=True,
               return_pil=True,
               smooth_start_si=2,
+              turn_on_cfg_start_si=2,
               turn_off_cfg_start_si=8,
+              last_scale_temp=0.1,
               seed=59,
              )
 ```
