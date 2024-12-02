@@ -3,18 +3,18 @@
 <a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
 <a href="https://huggingface.co/spaces/">
 	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo-orange' />
-</a>&nbsp;
-
-We present Switti, a scale-wise transformer for text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
+</a>
 
 <p align="center">
 <img src="assets/teaser.png" width=95%>
 <p>
+We present Switti, a scale-wise transformer for fast text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
 
-This repo contains code required to reproduce training of our models (Switti and Switti (AR)) and a notebook with an inference example.
+This repo contains training code for our models (Switti and Switti (AR)) and a notebook with an inference example.
 
 # Setup
 
+## Environment
 First, create a new environment and install Pytorch using conda:
 ```bash
 conda create -n switti python=3.11
@@ -27,7 +27,7 @@ Next, install other libraries required for training and inference via pip
 pip install -r requirements.txt
 ```
 
-## [Optional] Install Apex
+### [Optional] Install Apex
 Apex is not essential to run our code, however it can accelerate both training and inference to some extent.
 
 To install apex from source:
@@ -67,7 +67,39 @@ During training, intermediate checkpoints and tensorboard logs will be saved to 
 Set `--use_ar=true` to train an AutoRegressive version of Switti
 
 # Inference
-You can experiment with Switti inference using various sampling parameters via [HuggingFace demo](https://) or a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
+## HF🤗 Models
+| [Switti AR](https://huggingface.co/yresearch/Switti-AR) |  [Switti](https://huggingface.co/yresearch/Switti) |  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
+|:---|:---|:---|
+
+## Experiments
+You can start generating images with Switti using this code snippet: 
+```python
+import torch
+from models import SwittiPipeline
+from calculate_metrics import to_PIL_image
+
+device = 'cuda:0'
+model_path = "yresearch/Switti"
+
+pipe = SwittiPipeline.from_pretrained(model_path, dtype=torch.bfloat16).to(device)
+
+prompts = ["an astronaut rides a pig through in the forest. next to a river, with clouds in the sky",
+           "flying robot koi fish with armour plating, neon glowing eyes and wiring, 4k, unreal engine, marvel comics style",
+           "sci-fi cosmic diarama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism",
+           "A cloud dragon flying over mountains, its body swirling with the wind.",
+          ]
+images = pipe(prompts,
+              cfg=6.0,
+              top_k=400,
+              top_p=0.95,
+              more_smooth=True,
+              return_pil=True,
+              smooth_start_si=2,
+              turn_off_cfg_start_si=8,
+              seed=59,
+             )
+```
+Alternatively, you can experiment with Switti inference using various sampling parameters via [HuggingFace demo](https://huggingface.co/spaces/dbaranchuk/Switti) or a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
 
 # Citation
 If you make use of our work, please cite our paper:
