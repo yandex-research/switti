@@ -40,7 +40,7 @@ class Args(Tap):
     data_path: str = "path_to_your_dataset"
     text_encoder_path: str = "openai/clip-vit-large-patch14"
     text_encoder_2_path: str = "laion/CLIP-ViT-bigG-14-laion2B-39B-b160k"
-    vae_ckpt: str | None
+    vae_ckpt: str | None = None
     exp_name: str = "experiment_name"
 
     # eval sampling args

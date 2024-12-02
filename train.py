@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 
 import dist
 from calculate_metrics import distributed_metrics_with_csv, to_PIL_image
-from models import Switti, VQVAE, build_models
+from models import Switti, VQVAE, VQVAEHF, build_models
 from models.basic_switti import AdaLNSelfCrossAttn
 from utils import arg_util, misc
 from utils.amp_sc import AmpOptimizer
@@ -71,11 +71,15 @@ def build_everything(args: arg_util.Args):
         use_crop_cond=args.use_crop_cond,
     )
     # Load VAE and Switti checkpoints
-    if args.vae_ckpt is None and not os.path.exists(DEFAULT_VAE_CKPT):
-        if dist.is_local_master():
+    if args.vae_ckpt is None:
+        args.vae_ckpt = DEFAULT_VAE_CKPT
+        if not os.path.exists(DEFAULT_VAE_CKPT) and dist.is_local_master():
             os.system(f'wget https://huggingface.co/FoundationVision/var/resolve/main/{DEFAULT_VAE_CKPT}')
-    dist.barrier()
-    vae_local.load_state_dict(torch.load(args.vae_ckpt, map_location="cpu"), strict=True)
+        dist.barrier()
+        vae_local.load_state_dict(torch.load(args.vae_ckpt, map_location="cpu"), strict=True)
+    else:
+        vae_local = VQVAEHF.from_pretrained(args.vae_ckpt).to(dist.get_device())
+
     start_it = load_model_state(args, switti_wo_ddp)
     vae_local: VQVAE = args.compile_model(vae_local, args.vfast)
     switti_wo_ddp: Switti = args.compile_model(switti_wo_ddp, args.tfast)

@@ -2,7 +2,7 @@ import torch.nn as nn
 
 from .clip import FrozenCLIPEmbedder
 from .switti import Switti
-from .vqvae import VQVAE
+from .vqvae import VQVAE, VQVAEHF
 from .pipeline import SwittiPipeline
 
 
