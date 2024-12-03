@@ -1,5 +1,5 @@
 # Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
-<a href='https://arxiv.org/'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
+<a href='https://arxiv.org/pdf/2412.01819'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
 <a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
 <a href="https://huggingface.co/spaces/dbaranchuk/Switti">
 	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo-orange' />
@@ -10,7 +10,11 @@
 <p>
 We present Switti, a scale-wise transformer for fast text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
 
-This repo contains training code for our models (Switti and Switti (AR)) and a notebook with an inference example.
+This repo contains training code for our models (Switti and Switti (AR)) and an inference example.
+
+## HF🤗 Models
+| [Switti](https://huggingface.co/yresearch/Switti) | [Switti AR](https://huggingface.co/yresearch/Switti-AR) |  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
+|:---|:---|:---|
 
 # Setup
 
@@ -66,12 +70,8 @@ During training, intermediate checkpoints and tensorboard logs will be saved to 
 
 Set `--use_ar=true` to train an AutoRegressive version of Switti
 
-# Inference
-## HF🤗 Models
-| [Switti AR](https://huggingface.co/yresearch/Switti-AR) |  [Switti](https://huggingface.co/yresearch/Switti) |  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
-|:---|:---|:---|
 
-## Experiments
+# Inference
 You can start generating images with Switti using this code snippet: 
 ```python
 import torch
@@ -94,7 +94,7 @@ images = pipe(prompts,
               more_smooth=True,
               return_pil=True,
               smooth_start_si=2,
-              turn_on_cfg_start_si=2,
+              turn_on_cfg_start_si=0,
               turn_off_cfg_start_si=8,
               last_scale_temp=0.1,
               seed=59,
@@ -103,6 +103,14 @@ images = pipe(prompts,
 Alternatively, you can experiment with Switti inference using various sampling parameters via [HuggingFace demo](https://huggingface.co/spaces/dbaranchuk/Switti) or a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
 
 # Citation
-If you make use of our work, please cite our paper:
-```
+```bibtex
+@article{voronov2024switti,
+	title={Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis}, 
+	author={Anton Voronov and Denis Kuznedelev and Mikhail Khoroshikh and Valentin Khrulkov and Dmitry Baranchuk},
+	year={2024},
+	eprint={2412.01819},
+	archivePrefix={arXiv},
+	primaryClass={cs.CV},
+	url={https://arxiv.org/abs/2412.01819}
+}
 ```
