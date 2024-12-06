@@ -84,7 +84,7 @@ pipe = SwittiPipeline.from_pretrained(model_path, dtype=torch.bfloat16).to(devic
 
 prompts = ["Cute winter dragon baby, kawaii, Pixar, ultra detailed, glacial background, extremely realistic",
            "flying robot koi fish with armour plating, neon glowing eyes and wiring, 4k, unreal engine, marvel comics style",
-           "sci-fi cosmic diarama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism",
+           "sci-fi cosmic diorama of a quasar and jellyfish in a resin cube, volumetric lighting, high resolution, hdr, sharpen, Photorealism",
            "A cloud dragon flying over mountains, its body swirling with the wind.",
           ]
 images = pipe(prompts,
