@@ -80,7 +80,7 @@ from models import SwittiPipeline
 device = 'cuda:0'
 model_path = "yresearch/Switti"
 
-pipe = SwittiPipeline.from_pretrained(model_path, dtype=torch.bfloat16).to(device)
+pipe = SwittiPipeline.from_pretrained(model_path, device=device, torch_dtype=torch.bfloat16)
 
 prompts = ["Cute winter dragon baby, kawaii, Pixar, ultra detailed, glacial background, extremely realistic",
            "flying robot koi fish with armour plating, neon glowing eyes and wiring, 4k, unreal engine, marvel comics style",
