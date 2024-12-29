@@ -87,7 +87,7 @@ import torch
 from models import SwittiPipeline
 
 device = 'cuda:0'
-model_path = "yresearch/Switti"
+model_path = "yresearch/Switti-1024"
 
 pipe = SwittiPipeline.from_pretrained(model_path, device=device, torch_dtype=torch.bfloat16)
 
@@ -104,7 +104,7 @@ images = pipe(prompts,
               return_pil=True,
               smooth_start_si=2,
               turn_on_cfg_start_si=0,
-              turn_off_cfg_start_si=8,
+              turn_off_cfg_start_si=11,
               last_scale_temp=0.1,
               seed=59,
              )
