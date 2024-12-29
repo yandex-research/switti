@@ -13,7 +13,7 @@ from huggingface_hub import PyTorchModelHubMixin
 
 from .basic_vae import Decoder, Encoder
 from .quant import VectorQuantizer2
-
+from utils.arg_util import RESOLUTION_PATCH_NUMS_MAPPING
 
 
 class VQVAE(nn.Module):
@@ -172,8 +172,9 @@ class VQVAEHF(VQVAE, PyTorchModelHubMixin):
         ch=160,
         test_mode=True,
         share_quant_resi=4,
-        v_patch_nums=(1, 2, 3, 4, 6, 9, 13, 18, 24, 32),
+        reso=1024,
     ):
+        v_patch_nums = tuple((int(x) for x in RESOLUTION_PATCH_NUMS_MAPPING[reso].split("_")))
         super().__init__(
             vocab_size=vocab_size,
             z_channels=z_channels,

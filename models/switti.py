@@ -10,7 +10,7 @@ from diffusers.models.embeddings import GaussianFourierProjection
 import dist
 from models.basic_switti import AdaLNBeforeHead, AdaLNSelfCrossAttn
 from models.rope import compute_axial_cis
-
+from utils.arg_util import RESOLUTION_PATCH_NUMS_MAPPING
 
 def get_crop_condition(
     heights: list, 
@@ -393,14 +393,16 @@ class SwittiHF(Switti, PyTorchModelHubMixin):
         use_swiglu_ffn=True,
         use_ar=False,
         use_crop_cond=True,
+        reso=512,
     ):
         heads = depth
         width = depth * 64
+        patch_nums = tuple([int(x) for x in RESOLUTION_PATCH_NUMS_MAPPING[reso].split("_")])
         super().__init__(
             depth=depth,
             embed_dim=width,
             num_heads=heads,
-            patch_nums=(1, 2, 3, 4, 6, 9, 13, 18, 24, 32),
+            patch_nums=patch_nums,
             rope=rope,
             rope_theta=rope_theta,
             rope_size=rope_size,

@@ -14,7 +14,6 @@ import torch
 import torch.distributed as tdist
 
 import dist
-from utils import arg_util
 
 os_system = functools.partial(subprocess.call, shell=True)
 
@@ -300,7 +299,7 @@ def glob_with_latest_modified_first(pattern, recursive=False):
 
 
 def auto_resume(
-    args: arg_util.Args, pattern="ckpt*.pth"
+    args, pattern="ckpt*.pth"
 ) -> Tuple[List[str], int, dict, dict]:
     info = []
     file = os.path.join(args.local_out_dir_path, pattern)

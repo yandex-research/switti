@@ -8,6 +8,8 @@ from models.switti import SwittiHF, get_crop_condition
 from models.helpers import sample_with_top_k_top_p_, gumbel_softmax_with_rng
 
 
+TRAIN_IMAGE_SIZE = (512, 512)
+
 class SwittiPipeline:
     vae_path = "yresearch/VQVAE-Switti"
     text_encoder_path = "openai/clip-vit-large-patch14"
@@ -31,9 +33,10 @@ class SwittiPipeline:
                         pretrained_model_name_or_path,
                         torch_dtype=torch.bfloat16,
                         device="cuda",
+                        reso=1024,
                         ):
         switti = SwittiHF.from_pretrained(pretrained_model_name_or_path).to(device)
-        vae = VQVAEHF.from_pretrained(cls.vae_path).to(device)
+        vae = VQVAEHF.from_pretrained(cls.vae_path, reso=reso).to(device)
         text_encoder = FrozenCLIPEmbedder(cls.text_encoder_path, device=device)
         text_encoder_2 = FrozenCLIPEmbedder(cls.text_encoder_2_path, device=device)
 
@@ -96,7 +99,6 @@ class SwittiPipeline:
         smooth_start_si: int = 0,
         turn_off_cfg_start_si: int = 10,
         turn_on_cfg_start_si: int = 0,
-        image_size: tuple[int, int] = (512, 512),
         last_scale_temp: None | float = None,
     ) -> torch.Tensor | list[PILImage]:
         """
@@ -127,8 +129,8 @@ class SwittiPipeline:
         cond_vector = switti.text_pooler(cond_vector)
 
         if switti.use_crop_cond:
-            crop_coords = get_crop_condition(2 * B * [image_size[0]],
-                                             2 * B * [image_size[1]],
+            crop_coords = get_crop_condition(2 * B * [TRAIN_IMAGE_SIZE[0]],
+                                             2 * B * [TRAIN_IMAGE_SIZE[1]],
                                              ).to(cond_vector.device)
             crop_embed = switti.crop_embed(crop_coords.view(-1)).reshape(2 * B, switti.D)
             crop_cond = switti.crop_proj(crop_embed)
@@ -211,7 +213,7 @@ class SwittiPipeline:
                 )
                 h_BChw = idx_Bl @ vae_quant.embedding.weight.unsqueeze(0)
             else:
-                # defaul nucleus sampling
+                # default nucleus sampling
                 idx_Bl = sample_with_top_k_top_p_(
                     logits_BlV, rng=rng, top_k=top_k, top_p=top_p, num_samples=1,
                 )[:, :, 0]
