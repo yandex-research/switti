@@ -2,7 +2,9 @@
 <a href='https://arxiv.org/pdf/2412.01819'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
 <a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
 <a href="https://huggingface.co/spaces/dbaranchuk/Switti">
-	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo-orange' />
+	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo--512-orange' />
+<a href="https://huggingface.co/spaces/dbaranchuk/Switti-1024">
+	    <img src='https://img.shields.io/badge/%F0%9F%A4%97%20-Demo--1024-orange' />
 </a>
 
 <p align="center">
@@ -109,7 +111,7 @@ images = pipe(prompts,
               seed=59,
              )
 ```
-Alternatively, you can experiment with Switti inference using various sampling parameters via [HuggingFace demo](https://huggingface.co/spaces/dbaranchuk/Switti) or a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
+Alternatively, you can experiment with Switti inference using various sampling parameters via HF demo in [1024x1024](https://huggingface.co/spaces/dbaranchuk/Switti-1024) or [512x512](https://huggingface.co/spaces/dbaranchuk/Switti) or using a Jupyter notebook [inference_example.ipynb](inference_example.ipynb).
 
 # Citation
 ```bibtex
