@@ -11,10 +11,19 @@
 We present Switti, a scale-wise transformer for fast text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
 
 This repo contains training code for our models (Switti and Switti (AR)) and an inference example.
-
+## 🔥 News!
+* Dec 29, 2024: models for 1024x1024 are released
+* Dec 5, 2024: Paper, demo, training and inference code are released
+  
 ## HF🤗 Models
-| [Switti](https://huggingface.co/yresearch/Switti) | [Switti AR](https://huggingface.co/yresearch/Switti-AR) |  [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti) |
-|:---|:---|:---|
+| Model | Resolution |
+|:---|:---|
+|[Switti](https://huggingface.co/yresearch/Switti) | 512x512 |
+|[Switti AR](https://huggingface.co/yresearch/Switti-AR) |  512x512 
+|[Switti-1024](https://huggingface.co/yresearch/Switti-1024) | 1024x1024 |
+|[Switti-1024-AR](https://huggingface.co/yresearch/Switti-1024-AR) |  1024x1024 |
+
+We also release our fine-tuned version of [VQVAE](https://huggingface.co/yresearch/VQVAE-Switti), which is capable of reconstruction in both 512x512 and 1024x1024.
 
 # Setup
 
