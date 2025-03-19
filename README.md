@@ -1,4 +1,4 @@
-# Github page for Accurate Compression of Text-to-Image Diffusion Models via Vector Quantization
+# Github page for Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
 
 ## Acknowledgments
 This page was constructed from [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template).
