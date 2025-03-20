@@ -1,4 +1,4 @@
-# Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
+# (CVPR 2025) Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis
 <a href='https://arxiv.org/pdf/2412.01819'><img src='https://img.shields.io/badge/ArXiv-Paper-red'></a> &nbsp; 
 <a href='https://yandex-research.github.io/switti/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> &nbsp; 
 <a href="https://huggingface.co/spaces/dbaranchuk/Switti">
@@ -14,7 +14,8 @@ We present Switti, a scale-wise transformer for fast text-to-image generation th
 
 This repo contains training code for our models (Switti and Switti (AR)) and an inference example.
 ## 🔥 News!
-* Dec 29, 2024: models for 1024x1024 are released
+* Feb 26, 2025: Paper is accepted at CVPR 2025
+* Dec 29, 2024: Models for 1024x1024 are released
 * Dec 5, 2024: Paper, demo, training and inference code are released
   
 ## HF🤗 Models
@@ -115,7 +116,7 @@ Alternatively, you can experiment with Switti inference using various sampling p
 
 # Citation
 ```bibtex
-@article{voronov2024switti,
+@inproceedings{voronov2024switti,
   title={Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis},
   author={Voronov, Anton and Kuznedelev, Denis and Khoroshikh, Mikhail and Khrulkov, Valentin and Baranchuk, Dmitry},
   journal={arXiv preprint arXiv:2412.01819},
