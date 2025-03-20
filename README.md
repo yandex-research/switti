@@ -8,7 +8,7 @@
 </a>
 
 <p align="center">
-<img src="assets/teaser.png" width=95%>
+<img src="assets/teaser.jpg" width=95%>
 <p>
 We present Switti, a scale-wise transformer for fast text-to-image generation that outperforms existing T2I AR models and competes with state-of-the-art T2I diffusion models while being faster than distilled diffusion models.
 
@@ -116,12 +116,9 @@ Alternatively, you can experiment with Switti inference using various sampling p
 # Citation
 ```bibtex
 @article{voronov2024switti,
-	title={Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis}, 
-	author={Anton Voronov and Denis Kuznedelev and Mikhail Khoroshikh and Valentin Khrulkov and Dmitry Baranchuk},
-	year={2024},
-	eprint={2412.01819},
-	archivePrefix={arXiv},
-	primaryClass={cs.CV},
-	url={https://arxiv.org/abs/2412.01819}
+  title={Switti: Designing Scale-Wise Transformers for Text-to-Image Synthesis},
+  author={Voronov, Anton and Kuznedelev, Denis and Khoroshikh, Mikhail and Khrulkov, Valentin and Baranchuk, Dmitry},
+  journal={arXiv preprint arXiv:2412.01819},
+  year={2024}
 }
 ```
