@@ -14,7 +14,7 @@ We present Switti, a scale-wise transformer for fast text-to-image generation th
 
 This repo contains training code for our models (Switti and Switti (AR)) and an inference example.
 ## 🔥 News!
-* Feb 26, 2025: Paper is accepted at CVPR 2025
+* Feb 26, 2025: Paper has been accepted at CVPR 2025
 * Dec 29, 2024: Models for 1024x1024 are released
 * Dec 5, 2024: Paper, demo, training and inference code are released
   
